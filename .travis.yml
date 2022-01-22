@@ -5,9 +5,9 @@ os:
 - windows
 - macos
 script:
-- if [ $TRAVIS_OS_NAME == windows]; then make windows; fi
-- if [ $TRAVIS_OS_NAME == linux]; then make linux; fi
-- if [ $TRAVIS_OS_NAME == osx]; then make osx; fi
+- if [ "$TRAVIS_OS_NAME" == "windows"]; then make windows; fi
+- if [ "$TRAVIS_OS_NAME" == "linux"]; then make linux; fi
+- if [ "$TRAVIS_OS_NAME" == "osx"]; then make osx; fi
 branches:
   only:
   - main
