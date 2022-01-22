@@ -10,14 +10,33 @@ script:
 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then clang++ dansay.cpp -o dansay-linux; fi
 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then clang++ dansay.cpp -o dansay-osx; fi
 deploy:
-  provider: releases
-  api_key:
-    secure: FWdWSJl9vcyq6R9QisWu6A8CAF2bPZG+HKmubM/6DHWxvkTmArnYMVIKIT3Tdi1SXqq4Ry0gxKii3dSeXPVgfs5EIYXxd3WnyHnInGRG0gKDRbCt7NJEBVaFpOTOhNd2uSh5BynjYqGTvRah8vS63beq9s/C4n7EhI1G3Q8y9hJE3V6cD2Wx1YU0+f4b2cyqGX/COspw2dpxsji6b8tDMYFZiY+bVP6U84yo0A6FoESlzEXQ3g0lxeKnRCbQvX5SAncOfnGVjuh2Ya0A3Qla3wGf1yqrBFjf5C6OQkxOhJN2bH0bE4gzcD3wA1EIdGGRb2AZSuZUtnVcp5Cx8ErFwmQo03CvXmQ+K8E5gmOrpVYor7Y7Ev5y4OHqmuC7KaHN2COMHxuYVaArFN5EQAm7sDuU5ra8aFjfMOUKjVBdBo86mzXCPSCQbr7ZpgdKnp9vnTa26otQJEYqRwLC4J8xL13a3Y9c1z3TjF/mtCHa3cB7sgbvNAttlagyqkG3MkSehhjP1oJGkc5hX5kSKdJY7QGIWcwTS4aA+CLmh5gDVnvff6Fxwi3NUA8Smyjitb5pcbjLHcRHF+qmAbLJZzE0VlRAPkX5s65FjaisxlLdxwc2Jj1V/lZVJMxcMBXhDIQmeukuPkmZloPPoRWrtQKorNhkrTysGYUBVorXDNFhl9c=
-  file: 
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dansay-windows.exe; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then dansay-linux.exe; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then dansay-osx.exe; fi
-  on:
-    repo: danbugs/dansay
-    branch: main
-  skip_cleanup: 'true'
+  - provider: releases
+    api_key:
+      secure: FWdWSJl9vcyq6R9QisWu6A8CAF2bPZG+HKmubM/6DHWxvkTmArnYMVIKIT3Tdi1SXqq4Ry0gxKii3dSeXPVgfs5EIYXxd3WnyHnInGRG0gKDRbCt7NJEBVaFpOTOhNd2uSh5BynjYqGTvRah8vS63beq9s/C4n7EhI1G3Q8y9hJE3V6cD2Wx1YU0+f4b2cyqGX/COspw2dpxsji6b8tDMYFZiY+bVP6U84yo0A6FoESlzEXQ3g0lxeKnRCbQvX5SAncOfnGVjuh2Ya0A3Qla3wGf1yqrBFjf5C6OQkxOhJN2bH0bE4gzcD3wA1EIdGGRb2AZSuZUtnVcp5Cx8ErFwmQo03CvXmQ+K8E5gmOrpVYor7Y7Ev5y4OHqmuC7KaHN2COMHxuYVaArFN5EQAm7sDuU5ra8aFjfMOUKjVBdBo86mzXCPSCQbr7ZpgdKnp9vnTa26otQJEYqRwLC4J8xL13a3Y9c1z3TjF/mtCHa3cB7sgbvNAttlagyqkG3MkSehhjP1oJGkc5hX5kSKdJY7QGIWcwTS4aA+CLmh5gDVnvff6Fxwi3NUA8Smyjitb5pcbjLHcRHF+qmAbLJZzE0VlRAPkX5s65FjaisxlLdxwc2Jj1V/lZVJMxcMBXhDIQmeukuPkmZloPPoRWrtQKorNhkrTysGYUBVorXDNFhl9c=
+    file: 
+    - dansay-windows.exe
+    on:
+      condition: $TRAVIS_OS_NAME = windows
+      repo: danbugs/dansay
+      branch: main
+    skip_cleanup: 'true'
+  - provider: releases
+    api_key:
+      secure: FWdWSJl9vcyq6R9QisWu6A8CAF2bPZG+HKmubM/6DHWxvkTmArnYMVIKIT3Tdi1SXqq4Ry0gxKii3dSeXPVgfs5EIYXxd3WnyHnInGRG0gKDRbCt7NJEBVaFpOTOhNd2uSh5BynjYqGTvRah8vS63beq9s/C4n7EhI1G3Q8y9hJE3V6cD2Wx1YU0+f4b2cyqGX/COspw2dpxsji6b8tDMYFZiY+bVP6U84yo0A6FoESlzEXQ3g0lxeKnRCbQvX5SAncOfnGVjuh2Ya0A3Qla3wGf1yqrBFjf5C6OQkxOhJN2bH0bE4gzcD3wA1EIdGGRb2AZSuZUtnVcp5Cx8ErFwmQo03CvXmQ+K8E5gmOrpVYor7Y7Ev5y4OHqmuC7KaHN2COMHxuYVaArFN5EQAm7sDuU5ra8aFjfMOUKjVBdBo86mzXCPSCQbr7ZpgdKnp9vnTa26otQJEYqRwLC4J8xL13a3Y9c1z3TjF/mtCHa3cB7sgbvNAttlagyqkG3MkSehhjP1oJGkc5hX5kSKdJY7QGIWcwTS4aA+CLmh5gDVnvff6Fxwi3NUA8Smyjitb5pcbjLHcRHF+qmAbLJZzE0VlRAPkX5s65FjaisxlLdxwc2Jj1V/lZVJMxcMBXhDIQmeukuPkmZloPPoRWrtQKorNhkrTysGYUBVorXDNFhl9c=
+    file: 
+    - dansay-linux
+    on:
+      condition: $TRAVIS_OS_NAME = linux
+      repo: danbugs/dansay
+      branch: main
+    skip_cleanup: 'true'
+  - provider: releases
+    api_key:
+      secure: FWdWSJl9vcyq6R9QisWu6A8CAF2bPZG+HKmubM/6DHWxvkTmArnYMVIKIT3Tdi1SXqq4Ry0gxKii3dSeXPVgfs5EIYXxd3WnyHnInGRG0gKDRbCt7NJEBVaFpOTOhNd2uSh5BynjYqGTvRah8vS63beq9s/C4n7EhI1G3Q8y9hJE3V6cD2Wx1YU0+f4b2cyqGX/COspw2dpxsji6b8tDMYFZiY+bVP6U84yo0A6FoESlzEXQ3g0lxeKnRCbQvX5SAncOfnGVjuh2Ya0A3Qla3wGf1yqrBFjf5C6OQkxOhJN2bH0bE4gzcD3wA1EIdGGRb2AZSuZUtnVcp5Cx8ErFwmQo03CvXmQ+K8E5gmOrpVYor7Y7Ev5y4OHqmuC7KaHN2COMHxuYVaArFN5EQAm7sDuU5ra8aFjfMOUKjVBdBo86mzXCPSCQbr7ZpgdKnp9vnTa26otQJEYqRwLC4J8xL13a3Y9c1z3TjF/mtCHa3cB7sgbvNAttlagyqkG3MkSehhjP1oJGkc5hX5kSKdJY7QGIWcwTS4aA+CLmh5gDVnvff6Fxwi3NUA8Smyjitb5pcbjLHcRHF+qmAbLJZzE0VlRAPkX5s65FjaisxlLdxwc2Jj1V/lZVJMxcMBXhDIQmeukuPkmZloPPoRWrtQKorNhkrTysGYUBVorXDNFhl9c=
+    file: 
+    - dansay-osx
+    on:
+      condition: $TRAVIS_OS_NAME = osx
+      repo: danbugs/dansay
+      branch: main
+    skip_cleanup: 'true'
