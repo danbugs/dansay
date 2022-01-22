@@ -6,7 +6,7 @@ os:
 - macos
 script:
 - if [ "$TRAVIS_OS_NAME" == "windows" ]; echo "I am on Windows"; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ]; echo "I am on Linux" fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; echo "I am on Linux"; fi
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; echo "I am on OSX"; fi
 branches:
   only:
