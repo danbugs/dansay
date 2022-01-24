@@ -2,15 +2,24 @@
 
 DANSAY_DIR="$HOME/dansay"
 
+if [[ ! -x "$(command -v git)" ]]
+then
+  echo ">>> GIT IS REQUIRED FOR THIS INSTALLATION."
+  exit 1
+fi
+
+DANSAY_LATEST_RELEASE="$(git ls-remote https://github.com/danbugs/dansay HEAD | grep -o '^\S*')"
+
 OS="$(uname)"
 if [[ "${OS}" == "Linux" ]]
 then
-    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/v1.0.0-posix/dansay-linux"
+    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-linux/dansay"
 elif [[ "${OS}" == "Darwin" ]]
 then
-    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/v1.0.0-posix/dansay-osx"
+    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-osx/dansay"
 else
-  abort ">>> THIS INSTALLATION METHOD ONLY WORKS FOR MACOS AND LINUX."
+  echo ">>> THIS INSTALLATION METHOD ONLY WORKS FOR MACOS AND LINUX."
+  exit 1
 fi
 
 case "${SHELL}" in
