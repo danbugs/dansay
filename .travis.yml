@@ -8,12 +8,11 @@ script:
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then clang++ dansay.cpp -o dansay.exe;
   fi
 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then clang++ dansay.cpp -o dansay; fi
-- if [ "$TRAVIS_OS_NAME" = "osx" ]; then clang++ dansay.cpp -o dansay; tar -czvf dansay-apple-darwin-x86_64.tar.gz dansay; fi
+- if [ "$TRAVIS_OS_NAME" = "osx" ]; then clang++ dansay.cpp -o dansay; fi
 before_deploy:
-  # Set up git user name and tag this commit
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - export TRAVIS_TAG="$(git log --format=%H -1)-$TRAVIS_OS_NAME"
   - git tag $TRAVIS_TAG
 deploy:
   - provider: releases
@@ -40,7 +39,7 @@ deploy:
     api_key:
       secure: FWdWSJl9vcyq6R9QisWu6A8CAF2bPZG+HKmubM/6DHWxvkTmArnYMVIKIT3Tdi1SXqq4Ry0gxKii3dSeXPVgfs5EIYXxd3WnyHnInGRG0gKDRbCt7NJEBVaFpOTOhNd2uSh5BynjYqGTvRah8vS63beq9s/C4n7EhI1G3Q8y9hJE3V6cD2Wx1YU0+f4b2cyqGX/COspw2dpxsji6b8tDMYFZiY+bVP6U84yo0A6FoESlzEXQ3g0lxeKnRCbQvX5SAncOfnGVjuh2Ya0A3Qla3wGf1yqrBFjf5C6OQkxOhJN2bH0bE4gzcD3wA1EIdGGRb2AZSuZUtnVcp5Cx8ErFwmQo03CvXmQ+K8E5gmOrpVYor7Y7Ev5y4OHqmuC7KaHN2COMHxuYVaArFN5EQAm7sDuU5ra8aFjfMOUKjVBdBo86mzXCPSCQbr7ZpgdKnp9vnTa26otQJEYqRwLC4J8xL13a3Y9c1z3TjF/mtCHa3cB7sgbvNAttlagyqkG3MkSehhjP1oJGkc5hX5kSKdJY7QGIWcwTS4aA+CLmh5gDVnvff6Fxwi3NUA8Smyjitb5pcbjLHcRHF+qmAbLJZzE0VlRAPkX5s65FjaisxlLdxwc2Jj1V/lZVJMxcMBXhDIQmeukuPkmZloPPoRWrtQKorNhkrTysGYUBVorXDNFhl9c=
     file: 
-    - dansay-apple-darwin-x86_64.tar.gz
+    - dansay
     on:
       condition: $TRAVIS_OS_NAME = osx
       repo: danbugs/dansay
