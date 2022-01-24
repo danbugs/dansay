@@ -12,3 +12,21 @@ These are the supported targets:
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/danbugs/dansay/main/install.sh)"
 ```
+
+## How to install on Windows?
+
+```
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/danbugs/dansay/main/install.ps1'))
+```
+
+## How to use?
+
+If you enter:
+```
+dansay hello
+```
+
+... You get:
+```
+hello
+```
