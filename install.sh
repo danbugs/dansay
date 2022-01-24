@@ -13,10 +13,10 @@ DANSAY_LATEST_RELEASE="$(git ls-remote https://github.com/danbugs/dansay HEAD | 
 OS="$(uname)"
 if [[ "${OS}" == "Linux" ]]
 then
-    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-linux/dansay-linux"
+    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-linux/dansay"
 elif [[ "${OS}" == "Darwin" ]]
 then
-    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-osx/dansay-osx"
+    DANSAY_URL="https://github.com/danbugs/dansay/releases/download/$DANSAY_LATEST_RELEASE-osx/dansay"
 else
   echo ">>> THIS INSTALLATION METHOD ONLY WORKS FOR MACOS AND LINUX."
   exit 1
