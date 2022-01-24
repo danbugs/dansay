@@ -4,6 +4,9 @@ os:
 - linux
 - windows
 - osx
+branch:
+  only:
+    - main
 script:
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then clang++ dansay.cpp -o dansay.exe;
   fi
