@@ -15,7 +15,7 @@ New-Item -ItemType Directory -Force -Path $DANSAY_DIR
 Invoke-WebRequest $DANSAY_URL -OutFile $DANSAY_DIR\dansay.exe
 ">>> DOWNLOADED BINARY."
 [Environment]::SetEnvironmentVariable("Path", $env:Path +";$DANSAY_DIR" , [System.EnvironmentVariableTarget]::User)
-refreshenv
+Update-SessionEnvironment
 ">>> INSTALLED."
 
 
