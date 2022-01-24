@@ -10,7 +10,7 @@ elif [[ "${OS}" == "Darwin" ]]
 then
     DANSAY_URL="https://github.com/danbugs/dansay/releases/download/v1.0.0-posix/dansay-osx"
 else
-  abort "This installation method only works for macOS and Linux."
+  abort ">>> THIS INSTALLATION METHOD ONLY WORKS FOR MACOS AND LINUX."
 fi
 
 case "${SHELL}" in
@@ -30,10 +30,15 @@ case "${SHELL}" in
     ;;
 esac
 
+if [[ ! -f $SHELL_PROFILE ]]
+then
+  touch $SHELL_PROFILE
+fi
+
 echo ">>> BINARY WILL BE STORED AT $HOME/dansay."
 mkdir $DANSAY_DIR
 
-cd $DANSAY_DIR && wget -q $DANSAY_URL
+cd $DANSAY_DIR && curl -L -s $DANSAY_URL --output dansay
 echo ">>> DOWNLOADED BINARY."
 
 DANSAY_IN_PATH=`grep 'PATH="$HOME/dansay:$PATH"' $SHELL_PROFILE`
@@ -44,6 +49,6 @@ then
     echo 'PATH="$HOME/dansay:$PATH"' >> $SHELL_PROFILE
 fi
 
-chmod +x $DANSAY_DIR/dansay-linux
+chmod +x $DANSAY_DIR/dansay
 echo ">>> INSTALLED."
 echo ">>> RUN \"source $SHELL_PROFILE\" TO FINALIZE."
